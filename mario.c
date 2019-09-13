@@ -9,12 +9,8 @@ void right(int);
 int main(void)
 {
     int height = pos_int("Enter height between 1 to 8:");
-    printf("The height you specified is: %i\n", height);
     
-    printf("Left-aligned pyramid with height %i:\n", height);
-    left(height);
-    
-    printf("\nRight-aligned pyramid with height %i:\n", height);
+    // Call function to draw right aligned pyramid
     right(height);
 }
 
