@@ -7,10 +7,9 @@ void pyramid(int);
     
 int main(void)
 {
-    int height = pos_int("Enter height between 1 to 8:");
-    printf("The height you specified is: %i\n", height);
-    
-    printf("Here's Mario's Pyramid with height %i\n", height);
+    int height = pos_int("Enter height between 1 to 8: ");
+ 
+    // Call function to draw pyramid
     pyramid(height);
 }
 
