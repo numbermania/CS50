@@ -44,17 +44,21 @@ int main(int argc, string argv[])
     // Call encrypt function and print ciphertext
     printf("ciphertext: ");
     encrypt(plain, key);
+    return 0;
 }
 
 // cipher = (plain + key)
 // Changes plaintext to encrypted text by above formula and prints it
 void encrypt(string plain, int key)
 {   
-    char encrypted;
+    int encrypted;
     
+    // Normalizes keys greater than 26
+    key = key % 26;
+  
     // Iterate over every char in text, encrypt, and print it
     for (int i = 0, n = strlen(plain); i < n; i++)
-    {
+    {        
         // If not a letter, value remains unchanged
         if (isalpha(plain[i]) == 0)
         {
