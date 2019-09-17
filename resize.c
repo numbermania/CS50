@@ -77,8 +77,7 @@ int main(int argc, char *argv[])
     int pad_out = (4 - (bi_out.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
     // calculate and set output image size = (width + padding) * height
-    bi_out.biSizeImage = (bi_out.biWidth + pad_out) * bi_out.biHeight;
-    printf("%d", bi_out.biSizeImage);
+    bi_out.biSizeImage = (bi_out.biWidth + pad_out) * abs(bi_out.biHeight) * 3;
 
     // calculate and set output file size = image size + both headers
     bf_out.bfSize = bi_out.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
