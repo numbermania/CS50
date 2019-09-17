@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
     bi_out.biSizeImage = (bi_out.biWidth + pad_out) * abs(bi_out.biHeight) * 3;
 
     // calculate and set output file size = image size + both headers
-    bf_out.bfSize = bi_out.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
+    bf_out.bfSize = sizeof(bi_out.biSizeImage) + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
 
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf_out, sizeof(BITMAPFILEHEADER), 1, outptr);
