@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cs50.h>
+#include <stdint.h>
 
-#include "bmp.h"
+typedef uint8_t BYTE;
 
 bool isNewJPG(BYTE *buffer);
 
