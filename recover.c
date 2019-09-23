@@ -94,6 +94,8 @@ int main(int argc, char *argv[])
     fclose(inptr);
     fclose(image);
     free(buffer);
+
+    return 0;
 }
 
 // Function to check first 4 bytes of buffer to see if it's a new JPEG
