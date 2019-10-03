@@ -203,7 +203,7 @@ bool unload(void)
             // Head of list moves to next node
             head = head->next;
             // Free placeholder
-            free(head);
+            free(temp);
         }
     }
 
