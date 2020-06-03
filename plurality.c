@@ -90,14 +90,18 @@ void print_winner(void)
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes > most)
+        {
             most = candidates[i].votes;
+        }
     }
     
     // Print candidates with vote counts matching most
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == most)
+        {
             printf("%s\n", candidates[i].name);
+        }
     }
 }
 
