@@ -230,13 +230,23 @@ void lock_pairs(void)
                 // Iterate through row in each column
                 for (int k = 0; k < candidate_count; k++)
                 {
-                    cycle = locked[k][j];
+                    // As soon as a true is found the in the column, break row loop and check next column
+                    if (locked[k][j])
+                    {
+                        cycle = true;
+                        break;
+                    }
+                    else
+                    {
+                        cycle = false;
+                    }
                 }
-            }
-            // If cycle is still false for one entire column, break loop, adding the lock will not cause a cycle
-            if (!cycle)
-            {
-                break;
+
+                // If cycle is still false for one entire column, break column loop, adding the lock will not cause a cycle
+                if (!cycle)
+                {
+                    break;
+                }
             }
         }
 
@@ -246,7 +256,6 @@ void lock_pairs(void)
             locked[pairs[i].winner][pairs[i].loser] = true;
         }
     }
-    return;
 }
 
 // Print the winner of the election
@@ -260,7 +269,15 @@ void print_winner(void)
     {
         for (int j = 0; j < candidate_count; j++)   // Row
         {
-            all_false = locked[j][i];
+            if (locked[j][i])
+            {
+                all_false = true;
+                break;
+            }
+            else
+            {
+                all_false = false;
+            }
         }
 
         // If all_false is still false, found the winner, update index and break out of loop
