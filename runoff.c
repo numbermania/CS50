@@ -180,7 +180,7 @@ bool print_winner(void)
     }
 
     // Check if the candidate with the most votes has a majority
-    if (max_votes >= round(voter_count / 2))
+    if (max_votes > round(voter_count / 2))
     {
         printf("%s\n", candidates[winner].name);
         return true;
