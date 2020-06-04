@@ -154,7 +154,7 @@ void tabulate(void)
         {
             // If candidate is not eliminated, update their vote and set j to exit loop
             int cindex = preferences[i][j];
-            if  (!candidates[cindex].eliminated)
+            if (!candidates[cindex].eliminated)
             {
                 candidates[cindex].votes++;
                 j = candidate_count;
@@ -186,7 +186,9 @@ bool print_winner(void)
         return true;
     }
     else
+    {
         return false;
+    }
 }
 
 // Return the minimum number of votes any remaining candidate has
