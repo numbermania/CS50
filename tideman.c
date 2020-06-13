@@ -32,6 +32,7 @@ void record_preferences(int ranks[]);
 void add_pairs(void);
 void sort_pairs(void);
 void lock_pairs(void);
+bool check_cycle(int win, int lose);
 void print_winner(void);
 
 int main(int argc, string argv[])
@@ -215,47 +216,46 @@ void sort_pairs(void)
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-    // Iterate through pairs[], adding where possible
+    // Iterate through pairs[] array
     for (int i = 0; i < pair_count; i++)
     {
-        // Check if adding lock would generate a cycle (at least one column must remain all false)
-        bool cycle = false;
-
-        // Iterate through the each column
-        for (int j = 0; j < candidate_count; j++)
+        // Pass current pair to check if adding it would create a cycle
+        if (!check_cycle(pairs[i].winner, pairs[i].loser))
         {
-            // Ignore column where the lock would be added
-            if (j != pairs[i].loser)
-            {
-                // Iterate through row in each column
-                for (int k = 0; k < candidate_count; k++)
-                {
-                    // As soon as a true is found the in the column, break row loop and check next column
-                    if (locked[k][j])
-                    {
-                        cycle = true;
-                        break;
-                    }
-                    else
-                    {
-                        cycle = false;
-                    }
-                }
-
-                // If cycle is still false for one entire column, break column loop, adding the lock will not cause a cycle
-                if (!cycle)
-                {
-                    break;
-                }
-            }
-        }
-
-        // Add lock if cycle is false (will not cause a cycle)
-        if (!cycle)
-        {
+            // No cycle generated, add pair
             locked[pairs[i].winner][pairs[i].loser] = true;
         }
     }
+}
+
+// Check if locking in the pair of candidate win and lose would create a cycle
+// Returns true if adding pair would create cycle
+bool check_cycle(int win, int lose)
+{
+    // Base Case: lose points at win -> cycle
+    if (locked[lose][win])
+    {
+        return true;
+    }
+
+    // Recursive Case: Check if the winner has lost to someone else
+    // Loop in locked when j = win
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (locked[i][win])     // If win has lost to i
+        {
+            if (check_cycle(i, lose))      // Check if i has won against lose
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    // if loop is able to complete, then no path exists, return false
+    return false;
 }
 
 // Print the winner of the election
