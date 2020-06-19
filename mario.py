@@ -25,8 +25,7 @@ for i in range(1, h + 1):
         else:
             if (j - h - 2) <= i:
                 print("#", end = "")
-            else:
-                print(" ", end = "")
+            # no padding spaces at the end, go to new line
 
     # row ends, new line
     print()
