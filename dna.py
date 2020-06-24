@@ -1,10 +1,11 @@
 import sys
 import csv
 
+
 def main():
     # Ensures number of user inputs correct
-        # First is csv file of DNA database
-        # Second is txt file with DNA sequence to identify
+    # First is csv file of DNA database
+    # Second is txt file with DNA sequence to identify
     if len(sys.argv) != 3:
         print("Usage: python dna.py data.csv sequence.txt")
         exit()
@@ -48,8 +49,10 @@ def main():
     print(counts['name'])
 
 # Function searchs seq and reports max times s_str is found consectively in seq
+
+
 def count_str(s_str):
-    count = 0;      # Default: s_str not found
+    count = 0      # Default: s_str not found
 
     # Iterate through each starting position of seq
     for i in range(len(SEQ)):
@@ -59,12 +62,14 @@ def count_str(s_str):
             substring = str(s_str * sub_len)
             if SEQ[i:j] == substring and sub_len > count:
                 count = sub_len
-    return count;
+    return count
 
 # Function to find person in dbase that matches c's STR counts, updates c's name key with appropriate value
+
+
 def find_match(counts):
     counts['name'] = "No match"        # Default no one in dbase matches
-    match = 0;
+    match = 0
 
     # Iterates over dbase to look for match
     for person in DBASE:        # person is dictionary
@@ -79,5 +84,6 @@ def find_match(counts):
         if match == len(KEYS) - 1:
             counts['name'] = person['name']
             break
+
 
 main()
