@@ -47,6 +47,7 @@ def main():
 
     # Print match
     print(counts['name'])
+    # print(counts)
 
 # Function searchs seq and reports max times s_str is found consectively in seq
 
@@ -56,12 +57,13 @@ def count_str(s_str):
 
     # Iterate through each starting position of seq
     for i in range(len(SEQ)):
-        for j in range(i + len(s_str), len(SEQ), len(s_str)):     # End of each seq substring
+        for j in reversed(range(i + len(s_str), len(SEQ), len(s_str))):     # End of each seq substring
             # If check seq substring against repeating s_str
             sub_len = len(SEQ[i:j]) // len(s_str)
             substring = str(s_str * sub_len)
             if SEQ[i:j] == substring and sub_len > count:
                 count = sub_len
+                break
     return count
 
 # Function to find person in dbase that matches c's STR counts, updates c's name key with appropriate value
@@ -73,12 +75,15 @@ def find_match(counts):
 
     # Iterates over dbase to look for match
     for person in DBASE:        # person is dictionary
+
         # check matches for each STR (avoid name key)
         for k in KEYS:
-            if k != "name" and int(counts[k]) == int(person[k]):
-                match += 1
-            else:
-                match = 0
+            if k != "name":
+                if int(counts[k]) == int(person[k]):
+                    match += 1
+                else:
+                    match = 0
+                    break
 
         # It match all keys, match found, update name and break
         if match == len(KEYS) - 1:
