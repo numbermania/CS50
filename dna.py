@@ -55,15 +55,22 @@ def main():
 def count_str(s_str):
     count = 0      # Default: s_str not found
 
+    # Iterate through possible repetitions of substring, reversed for most efficient count
+    for i in range(len(SEQ) // len(s_str), 0, -1):
+        substring = str(s_str * i)
+        if SEQ.count(substring) == 1:       # Substring is found, update count, break from loop
+            count = i
+            break
     # Iterate through each starting position of seq
-    for i in range(len(SEQ)):
-        for j in reversed(range(i + len(s_str), len(SEQ), len(s_str))):     # End of each seq substring
-            # If check seq substring against repeating s_str
-            sub_len = len(SEQ[i:j]) // len(s_str)
-            substring = str(s_str * sub_len)
-            if SEQ[i:j] == substring and sub_len > count:
-                count = sub_len
-                break
+    # for i in range(len(SEQ)):
+    #     for j in reversed(range())
+        # for j in reversed(range(i + len(s_str), len(SEQ), len(s_str))):     # End of each seq substring
+        #     # If check seq substring against repeating s_str
+        #     sub_len = len(SEQ[i:j]) // len(s_str)
+        #     substring = str(s_str * sub_len)
+        #     if SEQ[i:j] == substring and sub_len > count:
+        #         count = sub_len
+        #         break
     return count
 
 # Function to find person in dbase that matches c's STR counts, updates c's name key with appropriate value
